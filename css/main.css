@@ -1,0 +1,57 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	padding: 0 30px;
+	background-color: #999;
+}
+
+.header {
+	padding: 10px;
+	text-align: center;
+	font-size: 2.5em;
+	font-weight: bold;
+}
+
+.type-icon {
+	height: 38px;
+	width: 38px;
+	border-radius: 6px;
+	background-color: #444;
+	margin: 0 5px;
+}
+
+.placeSelected {
+	font-weight: bold;
+	color: blue;
+}
+
+#map {
+	top: 0;
+	height: 100%;
+	min-height: 800px;
+	border: 1px solid black;
+}
+
+#typeplaces {
+	cursor: pointer;
+}
+
+/* Small screens */
+@media screen and (max-width: 768px) {
+	.header {
+		padding: 5px;
+		text-align: center;
+		font-size: 1.5em;
+		font-weight: bold;
+	}
+}
+
+/* Play with landscape version
+@media screen and (orientation: landscpae) {
+	.header {
+		color: blue;
+	}
+}
+*/

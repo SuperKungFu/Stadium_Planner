@@ -1,6 +1,3 @@
-# Stadium_Planner
-Udacity project for neighborhood app
-
 # How to Use
 Open index.html
 1. Choose your favorite team from the list available.

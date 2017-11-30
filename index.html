@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Neighborhood Map</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/lib/knockout-3.2.0.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body>
+    <main class="container-fluid">
+    <div class="row header">
+        <div class="col-sm-12" style=" background-color: #fff;">Stadium Planner</div>
+    </div>
+    <div class="row" style="padding-top: 5px;">
+        <div class="col-sm-5 col-lg-3">
+            <div class="dropdown">
+                <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown"
+                    style="font-weight: bold; border: 10px solid; background-color: white;"
+                    data-bind="with: currentTeam(), style: {color: currentTeam().maincolor, borderColor: currentTeam().secondcolor}">
+                    <span data-bind="text: name"></span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" data-bind="foreach: teamList()">
+                    <li data-bind="click: $parent.setCurrentTeam">
+                        <a href="#" data-bind="text: name"></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>&nbsp;</div>
+            <!-- Button list for selecting type -->
+            <div style="text-align: center">
+            <button class="type-icon" style="background: white url('restaurant-32.gif') no-repeat;"
+                data-bind="click: findPlaces.bind($data, 'restaurant')"}></button>
+            <button class="type-icon" style="background: white url('bar-32.gif') no-repeat;"
+                data-bind="click: findPlaces.bind($data, 'bar')"></button>
+            <button class="type-icon" style="background: white url('gas-32.gif') no-repeat;"
+                data-bind="click: findPlaces.bind($data, 'gas_station')"></button>
+            <button class="type-icon" style="background: white url('parking-32.gif') no-repeat;"
+                data-bind="click: findPlaces.bind($data, 'parking')"></button>
+            <button class="type-icon" style="background: white url('atm-32.gif') no-repeat;"
+                data-bind="click: findPlaces.bind($data, 'atm')"></button>
+            </div>
+
+            <div>&nbsp;</div>
+
+            <!-- Collapse list for place information -->
+            <div class="panel-group" id="typeplaces" data-bind="foreach: placeList">
+                <div class="panel">
+                <div class="panel-heading"
+                    data-bind="text: name, click: $parent.getPlaceInfo, attr: {'data-target': '#place_' + $index()},
+                        css: { placeSelected: $parent.currentPlace() && name == $parent.currentPlace().name }"
+                    data-toggle="collapse" data-parent="#typeplaces"></div>
+                <div class="panel-body panel-collapse collapse" data-bind="attr: {id: 'place_' + $index()}"><b>Foursquare info:</b>
+                    <div data-bind="html: $root.fsInfo"></div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- the map -->
+        <div class="col-sm-7 col-lg-9">
+            <div id="map">Loading...</div>
+        </div>
+    </div>
+    </main>
+
+    <script 
+        src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCIVI2063ixGghkjRZcKlEDFoXS3DJjJ4c&v=3&callback=initMap"
+        onerror="mapErrorHandler()">
+    </script>
+</body>
+</html>
